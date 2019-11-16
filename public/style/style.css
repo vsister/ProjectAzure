@@ -1,0 +1,9 @@
+.content{
+    margin-left: 40%;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+

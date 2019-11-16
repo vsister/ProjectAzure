@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Счётчик</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style/style.css"/>
+    </head>
+    <body>
+        <div class="content">
+            <div class="count"><%= Counter%></div>
+            <div class="forms">
+                <form method="POST" action="/inc">
+                    <button type="submit" class="btn btn-primary btn-lg pl-5 pr-4">Добавить</button>
+                </form>
+                <form method="POST" action="/clear">
+                    <button type="submit" class="btn btn-secondary btn-lg pl-5 pr-5">Сброc</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
