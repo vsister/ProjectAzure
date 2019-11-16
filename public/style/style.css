@@ -1,9 +1,16 @@
 .content{
     margin-left: 40%;
+    
 }
-
-.buttons{
-    display: flex;
+.count{
+    margin-left: 18%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 30px;
+    color: blue;
+}
+.forms{
+    display:flex;
     flex-direction: row;
 }
 

@@ -13,7 +13,7 @@ app.use(express.static(publicPath))
 
 let counter = 0
 
-app.get('/', (req,res)=>{
+app.get('*', (req,res)=>{
     res.render('index', {Counter: counter})
 })
 
