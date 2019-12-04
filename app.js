@@ -61,6 +61,11 @@ app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/auth/github' }),
   function(req, res) {
     res.redirect('/');
-  });
+});
+
+app.get('/logout', (res,req) => {
+  req.logOut()
+  res.redirect('/')
+})
 
 app.listen(port, ()=>{console.log('Слушаем порт ' + port)})
