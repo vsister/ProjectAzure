@@ -41,7 +41,7 @@ const auth = (req, res, next) => {
 
 let counter = 0
 
-app.get('*', auth, (req,res)=>{
+app.get('/', auth, (req,res)=>{
     res.render('index', {Counter: counter})
 })
 
