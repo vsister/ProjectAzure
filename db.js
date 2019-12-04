@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 
 
 mongoose.connect(
-    'mongodb://user:pass123@ds018839.mlab.com:18839/gridncloud'
+    'mongodb://user:pass123@ds018839.mlab.com:18839/gridncloud',  { 
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
+      }
 )
 
 const connection = mongoose.connection
