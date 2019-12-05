@@ -63,9 +63,9 @@ app.get('/auth/github/callback',
     res.redirect('/');
 });
 
-app.get('/logout', (res,req) => {
-  req.logOut()
-  res.redirect('/')
+app.get('/logout', (req,res) => {
+  req.logOut();
+  res.redirect('/');
 })
 
 app.listen(port, ()=>{console.log('Слушаем порт ' + port)})
