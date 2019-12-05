@@ -8,10 +8,10 @@ passport.use(new GitHubStrategy({
     callbackURL: "https://projectgridcloud.azurewebsites.net/auth/github/callback"
   },
   function(accessToken, refreshToken, params, profile, done) {
-    UserModel.findOne({ githubId: profile.id }, function(err, user) {
+    User.findOne({ githubId: profile.id }, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
-        let user = UserModel.create({githubId: profile.id})
+        let user = User.create({githubId: profile.id})
       } 
       return done(null, user);
     })
@@ -26,7 +26,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(async function(id, done) {
   try{
-    const user = await UserModel.findOne({ githubId: id})
+    const user = await User.findOne({ githubId: id})
     if(!user) {
       return done(null, false)
     }
