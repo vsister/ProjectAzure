@@ -1,6 +1,6 @@
 const passport = require('passport')
 const GitHubStrategy = require('passport-github').Strategy;
-const User =  require('./db') 
+const User =  require('./User') 
 
 passport.use(new GitHubStrategy({
     clientID: "d282c377c12a66b7f86d",

@@ -19,11 +19,4 @@ connection.once('open', async function(){
     console.log('MongoDB successfully connected')
 })
 
-
-const userSchema = mongoose.Schema({
-    githubId: String,
-})
-
-const User = connection.model('User', userSchema)
-
-module.exports = User
+module.exports = connection
