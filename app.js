@@ -41,7 +41,7 @@ const auth = (req, res, next) => {
 
 let counter = 0
 
-app.get('/', auth, (req,res)=>{
+app.get('/',  (req,res)=>{
     res.render('index', {Counter: counter})
 })
 
@@ -49,11 +49,11 @@ app.get('/login', (req,res) =>{
   res.render('login')
 })
 
-app.post('/inc', auth, (req,res)=>{
+app.post('/inc', (req,res)=>{
     ++counter
     res.redirect('/')
 })
-app.post('/clear', auth,(req,res)=>{
+app.post('/clear', (req,res)=>{
     counter = 0
     res.redirect('/')
 })
