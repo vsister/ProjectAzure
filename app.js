@@ -46,7 +46,7 @@ app.get('/', auth, (req,res)=>{
 })
 
 app.get('/login', (req,res) =>{
-  res.render('index')
+  res.render('login')
 })
 
 app.post('/inc', auth, (req,res)=>{
