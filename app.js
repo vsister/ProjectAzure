@@ -4,7 +4,7 @@ const publicPath = path.join(__dirname, '/public')
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require("./passport")
-const port = process.env.PORT || 80
+const port = process.env.PORT || 8080
 
 const app = express()
 app.set("view engine", "ejs")
@@ -35,7 +35,7 @@ const auth = (req, res, next) => {
     next()
   }
   else {
-    return res.redirect('/auth/github')
+    return res.redirect('/login')
   }
 }
 
@@ -43,6 +43,10 @@ let counter = 0
 
 app.get('/', auth, (req,res)=>{
     res.render('index', {Counter: counter})
+})
+
+app.get('/login', (req,res) =>{
+  res.render('index')
 })
 
 app.post('/inc', auth, (req,res)=>{
@@ -58,7 +62,7 @@ app.get('/auth/github',
   passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/auth/github' }),
+  passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
 });

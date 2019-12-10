@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 
 mongoose.connect(
-    'mongodb://user:pass123@ds018839.mlab.com:18839/gridncloud',  { 
+    'mongodb://user:perfectpassword1998@ds042898.mlab.com:42898/gridncloud',  { 
         useNewUrlParser: true,
         useFindAndModify: false,
         useUnifiedTopology: true
