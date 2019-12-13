@@ -80,6 +80,11 @@ app.get('/create', (req,res)=>{
   res.redirect('/')
 })
 
+app.get('/remove', (req,res)=>{
+  ans.remove()
+  res.redirect('/')
+})
+
 app.post('/translate', async (req,res) => {
   let translation = await Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
   await User.findOneAndUpdate({githubId: "34608285"},{$push : {translations : translation._id}})
