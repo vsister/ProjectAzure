@@ -2,7 +2,7 @@
 <html lang="ru">
     <head>
         <meta charset="utf-8">
-        <title>Счётчик</title>
+        <title>Переводчик</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style/style.css"/>
     </head>
@@ -19,26 +19,21 @@
                 <p>
                     <input name="lang1" type="radio" value="ru"> Русский
                     <input name="lang1" type="radio" value="en" checked> Английский
-                    <input name="lang1" type="radio" value="pdzen"> Испанский
+                    <input name="lang1" type="radio" value="es"> Испанский
+                <b>=></b>
+                    <input name="lang2" type="radio" value="ru" checked> Русский
+                    <input name="lang2" type="radio" value="en"> Английский
+                    <input name="lang2" type="radio" value="es"> Испанский
                 </p>
                     <textarea name="to_translate" cols="80" rows="8"></textarea></p>
 
                     <div class="buttons">
                     <p><input class="btn btn-success" type="submit" value="Перевести">
                      <input class="btn btn-dark" type="reset" value="Очистить"></p>
-                   <h3><b>Перевод</b></h3> 
                     </div>
 
-                    <p>
-                        <input name="lang2" type="radio" value="ru" checked> Русский
-                        <input name="lang2" type="radio" value="en" > Английский
-                        <input name="lang2" type="radio" value="es"> Испанский
-                    </p>
-                    </form>
-                    <textarea name="to_translate" cols="80" rows="8"></textarea></p>
-                       
-                    
-        
+                   
+                    </form>       
         </div>
     </body>
 </html>

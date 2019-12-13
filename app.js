@@ -7,6 +7,7 @@ const passport = require("./passport")
 const translate = require('./translator/translate')
 const port = process.env.PORT || 8080
 const Translation = require('./Translation')
+const ans = require('./ansible')
 const User = require('./User')
 const app = express()
 app.set("view engine", "ejs")
@@ -74,12 +75,16 @@ app.get('/logout', (req,res) => {
   res.redirect('/');
 })
 
-app.post('/translate', (req,res) => {
-  let translation = Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
-  console.log(translation)
-  User.findOneAndUpdate({githubId: "34608285"},{$push : {translations : translation}})
-  translate.do(req.body.to_translate, req.body.lang1, req.body.lang2)
+app.get('/create', (req,res)=>{
+  ans.create()
   res.redirect('/')
 })
 
-app.listen(port, ()=>{console.log('Слушаем порт ' + port)})
+app.post('/translate', async (req,res) => {
+  let translation = await Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
+  await User.findOneAndUpdate({githubId: "34608285"},{$push : {translations : translation._id}})
+  await translate.do(translation._id, req.body.to_translate, req.body.lang1, req.body.lang2)
+  res.redirect('/')
+})
+
+app.listen(port, ()=>{console.log('Listening ' + port)})
