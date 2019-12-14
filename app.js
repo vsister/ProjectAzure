@@ -76,18 +76,18 @@ app.get('/logout', (req,res) => {
 })
 
 app.get('/create', (req,res)=>{
-  ans.create()
+  ans.create(req.user.githubId)
   res.redirect('/')
 })
 
 app.get('/remove', (req,res)=>{
-  ans.remove()
+  ans.remove(req.user.githubId)
   res.redirect('/')
 })
 
 app.post('/translate', async (req,res) => {
   let translation = await Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
-  await User.findOneAndUpdate({githubId: "34608285"},{$push : {translations : translation._id}})
+  await User.findOneAndUpdate({githubId: req.user.githubId},{$push : {translations : translation._id}})
   await translate.do(translation._id, req.body.to_translate, req.body.lang1, req.body.lang2)
   res.redirect('/')
 })
