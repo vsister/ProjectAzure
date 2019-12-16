@@ -16,6 +16,7 @@ app.set("view engine", "ejs")
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(publicPath))
+
 let getHistory = async function(user_id){
   let User = await UserModel.findOne({githubId:user_id})
   let Translations = []
@@ -54,7 +55,7 @@ const auth = function(req, res, next) {
 let counter = 0
 
 app.get('/history',auth,  function(req,res) {
-  res.render('history', {Translation : await db.getHistory(req.user.githubId)})
+  res.render('history', {Translation : await getHistory(req.user.githubId)})
 });
 
 app.get('/',auth,  function(req,res) {
