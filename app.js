@@ -43,7 +43,7 @@ const auth = function(req, res, next) {
 }
 
 app.get('/',auth,  function(req,res) {
-    res.render('index', {Counter: counter})
+    res.render('index')
 });
 
 app.get('/auth/github',
