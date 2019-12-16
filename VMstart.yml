@@ -1,0 +1,43 @@
+- name: VM start
+  hosts: dev
+  gather_facts: yes
+  become: yes
+  vars:
+    NODEJS_VERSION: "8"
+    ansible_distribution_release: "xenial" #trusty
+  tasks:
+    - name: Install the gpg key for nodejs LTS
+      apt_key:
+        url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+  
+    - name: Install the nodejs LTS repos
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
+        state: present
+        update_cache: yes
+  
+    - name: Install the nodejs
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Clone the repository
+      git:
+        repo: https://github.com/vsister/Translator.git
+        dest: /home/azureuser/translation
+
+    - name: Update npm
+      npm:
+        path=/home/azureuser/translation
+    
+    - name: npm install
+      shell: npm install /home/azureuser/translation
+
+    - name: start app
+      shell: node /home/azureuser/translation/app.js
+      environment:
+        ID: "{{ tr_ID }}"
+        LANG1: "{{ lang1 }}"
+        LANG2: "{{ lang2 }}"
+        TEXT: "{{ text }}"

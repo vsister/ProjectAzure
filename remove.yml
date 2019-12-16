@@ -1,7 +1,10 @@
-- hosts: localhost
+- name: Remove VM
+  hosts: localhost
   connection: local
   tasks:
-    - name: Delete a resource group including resources it contains
-      azure_rm_resourcegroup:
-        name: "{{ ID }}"
+    - name: Delete VM
+      azure_rm_virtualmachine:
+        resource_group: "{{ ID }}"
+        name: "myVM"
+        remove_on_absent: all
         state: absent

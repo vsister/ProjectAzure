@@ -1,6 +1,7 @@
 const passport = require('passport')
 const GitHubStrategy = require('passport-github').Strategy;
 const User =  require('./User') 
+const ansible = require('./ansible')
 
 passport.use(new GitHubStrategy({
     clientID: "d282c377c12a66b7f86d",
@@ -12,6 +13,7 @@ passport.use(new GitHubStrategy({
       if (err) { return done(err); }
       if (!user) {
         let user = User.create({githubId: profile.id})
+        ansible.createRG(profile.id)
       } 
       return done(null, user);
     })

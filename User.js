@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
 const connection = require('./db')
+const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
     githubId: String,
