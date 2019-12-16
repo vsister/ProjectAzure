@@ -23,7 +23,7 @@ let getHistory = async function(user_id){
       let translation = await t.findOne({_id: id})
       Translations.push(translation)
   }
-  return Imgs
+  return Translations
 }
 app.use(
   session({
