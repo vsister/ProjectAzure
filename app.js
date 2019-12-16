@@ -4,10 +4,10 @@ const publicPath = path.join(__dirname, '/public')
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require("./passport")
-const translate = require('./translator/translate')
 const port = process.env.PORT || 8080
 const ansible = require('./ansible')
 const User = require('./User')
+const Translation = require('./Translation')
 const app = express()
 app.set("view engine", "ejs")
 
@@ -42,12 +42,6 @@ const auth = function(req, res, next) {
   }
 }
 
-let counter = 0
-
-// app.get('/history',auth,  function(req,res) {
-//   res.render('history', {Translation : await getHistory(req.user.githubId)})
-// });
-
 app.get('/',auth,  function(req,res) {
     res.render('index', {Counter: counter})
 });
@@ -63,16 +57,6 @@ app.get('/login', function(req,res) {
 app.get('/logout',auth, function(req,res) {
   req.logOut();
   res.redirect('/');
-});
-
-app.post('/inc',auth, function(req,res) {
-    ++counter
-    res.redirect('/')
-});
-
-app.post('/clear',auth, function(req,res) {
-    counter = 0
-    res.redirect('/')
 });
 
 app.get('/auth/github/callback', 
