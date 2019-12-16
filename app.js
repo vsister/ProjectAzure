@@ -42,8 +42,9 @@ const auth = function(req, res, next) {
 }
 
 app.get('/',auth,  async function(req,res) {
-  let user = await User.findOne(req.user.githubId)
-  res.render('index',{Us: user})
+  // let user = await User.findOne(req.user.githubId)
+  // res.render('index',{Us: user})
+  res.render('index')
 });
 
 app.get('/auth/github',
