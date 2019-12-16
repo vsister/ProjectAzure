@@ -9,13 +9,22 @@ const port = process.env.PORT || 8080
 const Translation = require('./Translation')
 const ansible = require('./ansible')
 const User = require('./User')
+const tr = require('./Translation')
 const app = express()
 app.set("view engine", "ejs")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(publicPath))
-
+let getHistory = async function(user_id){
+  let User = await UserModel.findOne({githubId:user_id})
+  let Translations = []
+  for(let id of User.translations){
+      let translation = await t.findOne({_id: id})
+      Translations.push(translation)
+  }
+  return Imgs
+}
 app.use(
   session({
     secret: 'hghtyNN23hbd54dstkhj2342asdfa3689jhf',
@@ -43,6 +52,10 @@ const auth = function(req, res, next) {
 }
 
 let counter = 0
+
+app.get('/history',auth,  function(req,res) {
+  res.render('history', {Translation : await db.getHistory(req.user.githubId)})
+});
 
 app.get('/',auth,  function(req,res) {
     res.render('index', {Counter: counter})
@@ -81,7 +94,7 @@ app.post('/translate',auth, async function(req,res) {
   let translation = await Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
   await User.findOneAndUpdate({githubId: req.user.githubId},{$push : {translations : translation._id}})
   ansible.startVM(req.user.githubId,translation._id, req.body.lang1, req.body.lang2, req.body.to_translate)
-  res.redirect('/')
+  res.redirect('/history')
 });
 
 app.listen(port, ()=>{console.log('Listening ' + port)})
