@@ -6,10 +6,8 @@ const FileStore = require('session-file-store')(session);
 const passport = require("./passport")
 const translate = require('./translator/translate')
 const port = process.env.PORT || 8080
-const Translation = require('./Translation')
 const ansible = require('./ansible')
 const User = require('./User')
-// const tr = require('./Translation')
 const app = express()
 app.set("view engine", "ejs")
 
