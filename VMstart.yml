@@ -37,7 +37,7 @@
     - name: start app
       shell: node /home/azureuser/translation/app.js
       environment:
-        ID: "{{ tr }}"
+        ID: "{{ ID }}"
         LANG1: "{{ lang1 }}"
         LANG2: "{{ lang2 }}"
         TEXT: "{{ text }}"

@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
     githubId: String,
-    translations: [String]
+    original: String,
+    translated: String
 })
 
 const User = connection.model('User', userSchema)

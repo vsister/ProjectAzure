@@ -7,7 +7,6 @@ const passport = require("./passport")
 const port = process.env.PORT || 8080
 const ansible = require('./ansible')
 const User = require('./User')
-const Translation = require('./Translation')
 const app = express()
 app.set("view engine", "ejs")
 
@@ -43,7 +42,7 @@ const auth = function(req, res, next) {
 }
 
 app.get('/',auth,  function(req,res) {
-    res.render('index')
+    res.render('index',{User: await User.findOne(req.user.githubId)})
 });
 
 app.get('/auth/github',
@@ -66,8 +65,7 @@ app.get('/auth/github/callback',
 });
 
 app.post('/translate',auth, async function(req,res) {
-  let translation = await Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
-  await User.findOneAndUpdate({githubId: req.user.githubId},{$push : {translations : translation._id}})
+  await User.findOneAndUpdate({githubId: req.user.githubId},{original: req.body.to_translate, translated: "Производится перевод"})
   ansible.startVM(req.user.githubId,translation._id, req.body.lang1, req.body.lang2, req.body.to_translate)
   res.redirect('/')
 });
