@@ -12,7 +12,7 @@ passport.use(new GitHubStrategy({
     User.findOne({ githubId: profile.id }, function(err, user) {
       if (err) { return done(err); }
       if (!user) {
-        let user = User.create({githubId: profile.id})
+        let user = User.create({githubId: profile.id, original:'', translated: ''})
         ansible.createRG(profile.id)
       } 
       return done(null, user);
