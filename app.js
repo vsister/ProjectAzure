@@ -44,9 +44,9 @@ const auth = function(req, res, next) {
 
 let counter = 0
 
-app.get('/history',auth,  function(req,res) {
-  res.render('history', {Translation : await getHistory(req.user.githubId)})
-});
+// app.get('/history',auth,  function(req,res) {
+//   res.render('history', {Translation : await getHistory(req.user.githubId)})
+// });
 
 app.get('/',auth,  function(req,res) {
     res.render('index', {Counter: counter})
