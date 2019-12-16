@@ -1,4 +1,5 @@
 const { exec, spawn } = require('child_process');
+const fs = require("fs");
 
 exports.createRG = function(id){  
   console.log("CreateRG")
@@ -20,7 +21,7 @@ exports.startVM = function(id,tr_id,lang1,lang2,text){
       }
       let findIP = stdout.substr(stdout.indexOf("The public IP is") + 17,20)
       let VM_IP = findIP.substr(0,findIP.indexOf('"')-1)
-      fs.writeFileSync('/mnt/d/Sasha/ProjectAzure/hosts.' + id, '[dev]\n' + VM_IP + '\n\n[dev:vars]\nansible_user=azureuser\nansible_ssh_common_args="-o StrictHostKeyChecking=no"\nansible_ssh_private_key_file=/home/site/repository/.ssh/id_rsa"')
+      fs.writeFileSync('/home/site/repository/hosts.' + id, '[dev]\n' + VM_IP + '\n\n[dev:vars]\nansible_user=azureuser\nansible_ssh_common_args="-o StrictHostKeyChecking=no"\nansible_ssh_private_key_file=/home/site/repository/.ssh/id_rsa"')
       console.log(stdout)
       console.log("StartVM")
       exec('ansible-playbook VMstart.yml --extra-vars "tr_ID=' + tr_id  +' lang1=' + lang1  +' lang2=' + lang2  +' text=\'' + text +'\'"   -i hosts.' + id, (err, stdout, stderr) => {
