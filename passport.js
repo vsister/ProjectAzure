@@ -22,7 +22,7 @@ passport.use(new GitHubStrategy({
 
 
 passport.serializeUser(function(user, done) {
-  console.log('Сериализация: ', user)
+  console.log('Serialization: ', user)
   done(null, user.githubId)
 })
 

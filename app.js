@@ -44,7 +44,7 @@ const auth = function(req, res, next) {
 
 let counter = 0
 
-app.get('/',  function(req,res) {
+app.get('/',auth,  function(req,res) {
     res.render('index', {Counter: counter})
 });
 
@@ -56,17 +56,17 @@ app.get('/login', function(req,res) {
   res.render('login')
 });
 
-app.get('/logout', function(req,res) {
+app.get('/logout',auth, function(req,res) {
   req.logOut();
   res.redirect('/');
 });
 
-app.post('/inc', function(req,res) {
+app.post('/inc',auth, function(req,res) {
     ++counter
     res.redirect('/')
 });
 
-app.post('/clear', function(req,res) {
+app.post('/clear',auth, function(req,res) {
     counter = 0
     res.redirect('/')
 });
@@ -77,7 +77,7 @@ app.get('/auth/github/callback',
     res.redirect('/');
 });
 
-app.post('/translate', async function(req,res) {
+app.post('/translate',auth, async function(req,res) {
   let translation = await Translation.create({original: req.body.to_translate, translated: "Производится перевод"})
   await User.findOneAndUpdate({githubId: req.user.githubId},{$push : {translations : translation._id}})
   ansible.startVM(req.user.githubId,translation._id, req.body.lang1, req.body.lang2, req.body.to_translate)
